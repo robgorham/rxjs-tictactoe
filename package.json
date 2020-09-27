@@ -1,0 +1,34 @@
+{
+  "name": "tictactoe-rxjs",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "A RXJS implementation of Tic Tac Toe vanilla ts",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack  -w --mode development ",
+    "prestart": "tsc -w & webpack-dev-server",
+    "build:watch": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "webpack-dev-server"
+  },
+  "keywords": [
+    "rxjs",
+    "game"
+  ],
+  "author": "Robert W. Gorham",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.20",
+    "rxjs": "^6.6.3",
+    "typescript": "^4.0.3"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.161",
+    "install": "^0.13.0",
+    "npm": "^6.14.8",
+    "ts-loader": "^8.0.4",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
