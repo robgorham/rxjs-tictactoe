@@ -29,7 +29,7 @@ const draw45DegreeLine = (
 const drawX = (
   ctx: CanvasRenderingContext2D,
   x: number,
-  y: number,
+  y: number, 
   size: number
 ): CanvasRenderingContext2D => {
   ctx.moveTo(x, y);
@@ -53,7 +53,14 @@ const drawO = (
     return ctx;
 };
 
-const paintX = (ctx: CanvasRenderingContext2D, idx: number, boardSize: number) => {
+const paintX = (ctx: CanvasRenderingContext2D, idx: number, char: string) => {
+  const xMultiplier = 185
+  const yMultiplier = 200
+  const xStart = 45
+  const yStart = 175
+  const {x, y } = arrayPositionToXY(idx);
+
+  ctx.fillText(char, x * xMultiplier + xStart, y * yMultiplier + yStart);
 
 }
 
@@ -71,7 +78,7 @@ const drawboard = (
   ctx.stroke();
   return ctx;
 };
-export const drawing = { drawLine, draw45DegreeLine, drawboard, drawX, drawO };
+export const drawing = { drawLine, draw45DegreeLine, drawboard, drawX, drawO, paintX };
 //#endregion
 
 //#region Math
@@ -87,8 +94,8 @@ const xyToArrayPosition = ( position: {x: number, y: number} ) => {
 }
 
 const arrayPositionToXY = ( index: number) =>{
-  const y = index % 3;
-  const x = index - y;
+  const x = index % 3;
+  const y = Math.floor(index / 3);
   return {x, y}
 }
 export const mathFuncs = { toQuadrantXY, xyToArrayPosition, arrayPositionToXY };

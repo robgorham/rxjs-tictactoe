@@ -26,8 +26,17 @@ const render = (ctx: CanvasRenderingContext2D | null) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx = drawing.drawboard(ctx, BOARD_SIZE);
     ctx.beginPath();
-    ctx = drawing.drawX(ctx, 35, 35, 130);
-    ctx = drawing.drawO(ctx, 300, 100, 65);
+    // ctx = drawing.drawO(ctx, 300, 100, 65);
+    ctx.font = "210px Arial";
+    //ctx.fillText("X", 35, 185);
+    drawing.paintX(ctx, 0, 'X');
+    drawing.paintX(ctx, 1, 'X');
+    drawing.paintX(ctx, 2, 'O');
+    drawing.paintX(ctx, 3, 'X');
+    drawing.paintX(ctx, 5, 'X');
+    drawing.paintX(ctx, 6, 'X');
+    drawing.paintX(ctx, 7, 'O');
+
     ctx.stroke();
   }
 };
