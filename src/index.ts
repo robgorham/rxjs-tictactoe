@@ -1,39 +1,58 @@
 // import * as Rx from 'rxjs';
-import { fromEvent, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, fromEvent, Observable, of} from "rxjs";
+import {switchMap, tap, withLatestFrom} from'rxjs/operators';
 
-const BOARD_SIZE = 600;
+import { drawing, mathFuncs} from "./functions";
+import { BOARD_SIZE, LOOPSTATE, PLAYERS } from "./constants";
+
 const canvas = <HTMLCanvasElement>document.getElementById("game-board");
 const context = canvas.getContext("2d");
-const drawLine  = ( ctx: CanvasRenderingContext2D, xstart: number, ystart:number, xEnd: number, yEnd: number): CanvasRenderingContext2D => {
-  ctx.moveTo(xstart, ystart);
-  ctx.lineTo(xEnd, yEnd);
-  return ctx;
-  
-  
-}
 
-const drawboard = (ctx: CanvasRenderingContext2D, size = BOARD_SIZE): void => {
-
-  const firstQ =  (size / 3);
-  const secondQ = firstQ * 2;  
-  
-  ctx = drawLine(ctx, firstQ, 0, firstQ, size)
-  ctx = drawLine(ctx, secondQ, 0, secondQ, size)
-  ctx = drawLine(ctx, 0, firstQ, size, firstQ);
-  ctx = drawLine(ctx, 0, secondQ, size, secondQ);
-  
-  ctx.stroke();
-};
-
-
-const source$ =<Observable<MouseEvent>> fromEvent(canvas, 'click');
-
-
+/**
+ * Game State
+ * gameboard Array<int>
+ * currentPlayer: IPlayer
+ * loopState: ['Start', 'Playing', 'Win','Stalemate']
+ */
+const source$ = <Observable<[MouseEvent, CanvasRenderingContext2D]>>fromEvent(canvas, "click").pipe(
+  switchMap((event) => combineLatest([of(event), of(context)]))
+)
+// const board$ = of();
+const board$ = new BehaviorSubject<Array<number>>([0,0,0,0,0,0,0,0,0]);
+const currentPlayer$ = new BehaviorSubject<number>(PLAYERS.PLAYER1);
+const loopState$ = new BehaviorSubject<number>(LOOPSTATE.START);
 const render = (ctx: CanvasRenderingContext2D | null) => {
-  if(ctx)
-  drawboard(ctx, 550);
+  if (ctx) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx = drawing.drawboard(ctx, BOARD_SIZE);
+    ctx.beginPath();
+    ctx = drawing.drawX(ctx, 35, 35, 130);
+    ctx = drawing.drawO(ctx, 300, 100, 65);
+    ctx.stroke();
+  }
 };
-source$.subscribe(evt => console.log('click event', JSON.stringify(evt.clientX)));  // The source that actually moves the game loop forward
+
+const source2$ = source$.pipe(
+  tap(console.log)
+);
+
+source2$.subscribe(([evt, ctx]) =>
+  {
+    console.log(
+      "click eventx",
+      JSON.stringify(evt.clientX),
+      "click eventy",
+      JSON.stringify(evt.clientY)
+    );
+    console.log(
+      mathFuncs.xyToArrayPosition(
+        mathFuncs.toQuadrantXY(evt.clientX, evt.clientY, BOARD_SIZE)
+      )
+    );
+    console.log(`mathFuncs.toQuadrantXY(evt.clientX, evt.clientY, BOARD_SIZE): ${JSON.stringify(mathFuncs.toQuadrantXY(evt.clientX, evt.clientY, BOARD_SIZE))}`);
+  }
+); // The source that actually moves the game loop forward
 
 render(context);
-console.log('Let us do it... again!')
+console.log("Let us do it... again!");
+console.log("really this is working?");

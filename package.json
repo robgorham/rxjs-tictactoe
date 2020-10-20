@@ -5,11 +5,10 @@
   "description": "A RXJS implementation of Tic Tac Toe vanilla ts",
   "main": "index.js",
   "scripts": {
-    "start": "webpack  -w --mode development ",
-    "prestart": "tsc -w & webpack-dev-server",
-    "build:watch": "tsc -w",
+    "start": "webpack-dev-server",
+    "build:watch": "webpack -w",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "webpack-dev-server"
+    "build": "webpack"
   },
   "keywords": [
     "rxjs",
@@ -24,6 +23,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.161",
+    "file-loader": "^6.1.0",
     "install": "^0.13.0",
     "npm": "^6.14.8",
     "ts-loader": "^8.0.4",
