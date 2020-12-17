@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   watch: true,
   mode: 'development',
-  entry: './src/index.ts',
+  entry: path.resolve(__dirname, 'src') + '/index.ts',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,

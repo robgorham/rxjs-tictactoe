@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "description": "A RXJS implementation of Tic Tac Toe vanilla ts",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "start": "webpack-dev-server",
     "build:watch": "webpack -w",
