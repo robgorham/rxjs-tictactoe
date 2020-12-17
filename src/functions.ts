@@ -53,7 +53,7 @@ const drawO = (
     return ctx;
 };
 
-const paintX = (ctx: CanvasRenderingContext2D, idx: number, char: string) => {
+const paintChar = (ctx: CanvasRenderingContext2D, idx: number, char: string) => {
   const xMultiplier = 185
   const yMultiplier = 200
   const xStart = 45
@@ -78,7 +78,7 @@ const drawboard = (
   ctx.stroke();
   return ctx;
 };
-export const drawing = { drawLine, draw45DegreeLine, drawboard, drawX, drawO, paintX };
+export const drawing = { drawLine, draw45DegreeLine, drawboard, drawX, drawO, paintChar };
 //#endregion
 
 //#region Math

@@ -29,13 +29,15 @@ const render = (ctx: CanvasRenderingContext2D | null) => {
     // ctx = drawing.drawO(ctx, 300, 100, 65);
     ctx.font = "210px Arial";
     //ctx.fillText("X", 35, 185);
-    drawing.paintX(ctx, 0, 'X');
-    drawing.paintX(ctx, 1, 'X');
-    drawing.paintX(ctx, 2, 'O');
-    drawing.paintX(ctx, 3, 'X');
-    drawing.paintX(ctx, 5, 'X');
-    drawing.paintX(ctx, 6, 'X');
-    drawing.paintX(ctx, 7, 'O');
+    drawing.paintChar(ctx, 0, 'X');
+    drawing.paintChar(ctx, 1, 'X');
+    drawing.paintChar(ctx, 2, 'O');
+    drawing.paintChar(ctx, 3, 'X');
+    drawing.paintChar(ctx, 4, 'X');
+    drawing.paintChar(ctx, 5, 'X');
+    drawing.paintChar(ctx, 6, 'X');
+    drawing.paintChar(ctx, 7, 'O');
+    drawing.paintChar(ctx, 8, 'X');
 
     ctx.stroke();
   }

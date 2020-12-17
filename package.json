@@ -5,7 +5,7 @@
   "description": "A RXJS implementation of Tic Tac Toe vanilla ts",
   "main": "index.ts",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --config webpack.config.cjs  ",
     "build:watch": "webpack -w",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
